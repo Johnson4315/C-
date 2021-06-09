@@ -1,6 +1,6 @@
 #include"practice8.h"
 
-static MYSQL* conn;        //Êı¾İ¿âÁ¬½Ó¾ä±ú
+static MYSQL* conn;        //æ•°æ®åº“è¿æ¥å¥æŸ„
 static char sql[1024];
 static struct order1
 {
@@ -20,17 +20,17 @@ static struct order2
 
 static void input2(int* i)
 {
-    printf("      ¸ÃÉÌÆ·µ¥¼ÛÊÇ:");
+    printf("      è¯¥å•†å“å•ä»·æ˜¯:");
     rewind(stdin);
     *i += scanf_s("%d", &goods.price);
-    printf("      ¹ºÂòÊıÁ¿Îª:");
+    printf("      è´­ä¹°æ•°é‡ä¸º:");
     rewind(stdin);
     *i += scanf_s("%d", &goods.num);
     if (*i == 2);
     else
     {
         *i = 0;
-        printf("ÊäÈë´íÎó,ÉÌÆ·µ¥¼Û¡¢¹ºÂòÊıÁ¿ÇëÊäÈëÊı×Ö,ÇëÖØĞÂÊäÈë:\n");
+        printf("è¾“å…¥é”™è¯¯,å•†å“å•ä»·ã€è´­ä¹°æ•°é‡è¯·è¾“å…¥æ•°å­—,è¯·é‡æ–°è¾“å…¥:\n");
         input2(i);
     }
 }
@@ -40,27 +40,27 @@ static void input()
     for (;;)
     {
         system("cls");
-        printf("ÇëÊäÈë¶©µ¥ºÅ(exitÍË³ö):");
+        printf("è¯·è¾“å…¥è®¢å•å·(exité€€å‡º):");
         rewind(stdin);
         scanf_s("%s", orders.id, 20);
         if (strcmp(orders.id, "exit") == 0)
             break;
-        printf("ÇëÊäÈë¿Í»§Ãû³Æ:");
+        printf("è¯·è¾“å…¥å®¢æˆ·åç§°:");
         rewind(stdin);
         scanf_s("%s", orders.name, 20);
-        printf("ÇëÊäÈë¿Í»§µØÖ·:");
+        printf("è¯·è¾“å…¥å®¢æˆ·åœ°å€:");
         rewind(stdin);
         scanf_s("%s", orders.address, 30);
-        printf("ÇëÊäÈë¿Í»§µç»°:");
+        printf("è¯·è¾“å…¥å®¢æˆ·ç”µè¯:");
         rewind(stdin);
         scanf_s("%s", orders.telenum, 20);
-        printf("ÇëÊäÈë¶©»õÈÕÆÚ:");
+        printf("è¯·è¾“å…¥è®¢è´§æ—¥æœŸ:");
         rewind(stdin);
         scanf_s("%s", orders.ordertime, 30);
-        printf("ÇëÊäÈë½»»õÈÕÆÚ:");
+        printf("è¯·è¾“å…¥äº¤è´§æ—¥æœŸ:");
         rewind(stdin);
         scanf_s("%s", orders.delivertime, 30);
-        printf("      ÇëÊäÈëÉÌÆ·Ãû³Æ:");
+        printf("      è¯·è¾“å…¥å•†å“åç§°:");
         rewind(stdin);
         scanf_s("%s", goods.name, 10);
         input2(&i);
@@ -73,7 +73,7 @@ static void input()
             if (mysql_query(conn, sql))
                 printf("%s\n", mysql_error(conn));
             else
-                printf("¶©µ¥ÊäÈë³É¹¦\n");
+                printf("è®¢å•è¾“å…¥æˆåŠŸ\n");
         }
         _getch();
     }
@@ -87,30 +87,30 @@ static void found()
     for (;;)
     {
         system("cls");
-        printf("***  1.¾İ¿Í»§Ãû³Æ²éÑ¯   ***\n");
-        printf("***  2.¾İ¿Í»§µç»°²éÑ¯   ***\n");
-        printf("***  3.¾İ¶©»õÈÕÆÚ·¶Î§²éÑ¯   ***\n");
-        printf("***  4.·µ»Ø           ***\n");
+        printf("***  1.æ®å®¢æˆ·åç§°æŸ¥è¯¢   ***\n");
+        printf("***  2.æ®å®¢æˆ·ç”µè¯æŸ¥è¯¢   ***\n");
+        printf("***  3.æ®è®¢è´§æ—¥æœŸèŒƒå›´æŸ¥è¯¢   ***\n");
+        printf("***  4.è¿”å›           ***\n");
         printf("***********************\n");
-        printf("ÇëÊäÈë¹¦ÄÜ±àºÅ:");
+        printf("è¯·è¾“å…¥åŠŸèƒ½ç¼–å·:");
         fflush(stdin);
         scanf_s("%d", &key);
         switch (key)
         {
         case 1:
-            printf("ÇëÊäÈë¿Í»§Ãû³Æ:");
+            printf("è¯·è¾“å…¥å®¢æˆ·åç§°:");
             rewind(stdin);
             gets_s(name, 20);
             sprintf(sql, "select orders.id,orders.name,orders.address,orders.telenum,orders.ordertime,orders.delivertime,goods.name,goods.price,goods.num from orders inner join goods on orders.id=goods.id where orders.name='%s'", name);
             break;
         case 2:
-            printf("ÇëÊäÈë¿Í»§µç»°:");
+            printf("è¯·è¾“å…¥å®¢æˆ·ç”µè¯:");
             rewind(stdin);
             gets_s(tel, 20);
             sprintf(sql, "select orders.id,orders.name,orders.address,orders.telenum,orders.ordertime,orders.delivertime,goods.name,goods.price,goods.num from orders inner join goods on orders.id=goods.id where orders.telenum='%s'", tel);
             break;
         case 3:
-            printf("ÇëÊäÈë¶©»õÈÕÆÚ·¶Î§(Á½¸öÈÕÆÚÖ®¼ä»»ĞĞ¸ô¿ª):");
+            printf("è¯·è¾“å…¥è®¢è´§æ—¥æœŸèŒƒå›´(ä¸¤ä¸ªæ—¥æœŸä¹‹é—´æ¢è¡Œéš”å¼€):");
             rewind(stdin);
             gets_s(ordertime1, 20);
             rewind(stdin);
@@ -125,22 +125,22 @@ static void found()
             printf("%s\n", mysql_error(conn));
         else
             res = mysql_store_result(conn);
-        i = (int)mysql_num_rows(res);            //»ñÈ¡½á¹ûĞĞÊı
-        if (i > 0)//Èç¹ûÓĞ¶©µ¥ĞÅÏ¢
+        i = (int)mysql_num_rows(res);            //è·å–ç»“æœè¡Œæ•°
+        if (i > 0)//å¦‚æœæœ‰è®¢å•ä¿¡æ¯
         {
-            printf("²éÑ¯µ½%d¸ö¶©µ¥ĞÅÏ¢£º\n", i);
-            printf("¶©µ¥ID\t¿Í»§Ãû³Æ\t¿Í»§µØÖ·\t¿Í»§µç»°\t¶©»õÈÕÆÚ\t½»»õÈÕÆÚ\tÉÌÆ·Ãû³Æ\tÏúÊÛÊıÁ¿\tÏúÊÛ×Ü½ğ¶î\n");
+            printf("æŸ¥è¯¢åˆ°%dä¸ªè®¢å•ä¿¡æ¯ï¼š\n", i);
+            printf("è®¢å•ID\tå®¢æˆ·åç§°\tå®¢æˆ·åœ°å€\tå®¢æˆ·ç”µè¯\tè®¢è´§æ—¥æœŸ\täº¤è´§æ—¥æœŸ\tå•†å“åç§°\té”€å”®æ•°é‡\té”€å”®æ€»é‡‘é¢\n");
             printf("-------------------------------------------------------------------------------------------------------- \n");
             while (1)
             {
-                row = mysql_fetch_row(res);          //¼ìË÷½á¹ûÒ»ĞĞ¸³Öµ¸ørow
-                if (row == NULL)                     //Ö±µ½ÎŞ½á¹û
+                row = mysql_fetch_row(res);          //æ£€ç´¢ç»“æœä¸€è¡Œèµ‹å€¼ç»™row
+                if (row == NULL)                     //ç›´åˆ°æ— ç»“æœ
                     break;
                 printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]);
             }
         }
         else
-            printf("\n²éÑ¯ÎŞ½á¹û\n");
+            printf("\næŸ¥è¯¢æ— ç»“æœ\n");
         mysql_free_result(res);
         printf("--------------------------------------------------------------------------------------------------------\n");
         _getch();
@@ -149,14 +149,14 @@ static void found()
 static void dele()
 {
     char id[20];
-    printf("ÇëÊäÈëÄãÒªÉ¾³ıµÄ¶©µ¥ºÅ:");
+    printf("è¯·è¾“å…¥ä½ è¦åˆ é™¤çš„è®¢å•å·:");
     rewind(stdin);
     gets_s(id, 20);
     sprintf(sql, "delete from orders where id='%s'", id);
     if (mysql_query(conn, sql))
         printf("%s\n", mysql_error(conn));
     else
-        printf("¶©µ¥É¾³ı³É¹¦£¡\n");
+        printf("è®¢å•åˆ é™¤æˆåŠŸï¼\n");
     _getch();
 }
 static void meau()
@@ -165,13 +165,13 @@ static void meau()
     for (;;)
     {
         system("cls");
-        printf("********¶©µ¥¹ÜÀí²Ëµ¥*********\n");
-        printf("***  1.¶©µ¥Â¼Èë¹¦ÄÜ   ***\n");
-        printf("***  2.¶©µ¥²éÑ¯¹¦ÄÜ   ***\n");
-        printf("***  3.¶©µ¥É¾³ı¹¦ÄÜ   ***\n");
-        printf("***  4.·µ»Ø           ***\n");
+        printf("********è®¢å•ç®¡ç†èœå•*********\n");
+        printf("***  1.è®¢å•å½•å…¥åŠŸèƒ½   ***\n");
+        printf("***  2.è®¢å•æŸ¥è¯¢åŠŸèƒ½   ***\n");
+        printf("***  3.è®¢å•åˆ é™¤åŠŸèƒ½   ***\n");
+        printf("***  4.è¿”å›           ***\n");
         printf("***********************\n");
-        printf("ÇëÊäÈë¹¦ÄÜ±àºÅ:");
+        printf("è¯·è¾“å…¥åŠŸèƒ½ç¼–å·:");
         fflush(stdin);
         scanf_s("%d", &key);
         switch (key)
@@ -187,22 +187,22 @@ static void meau()
 }
 void order8()
 {
-    const char* server = "localhost";   //±¾µØÁ¬½Ó
-    const char* user = "root";          //ÓÃ»§Ãû
-    const char* password = "...haohaoxuexi123";//mysqlÃÜÂë
-    const char* database = "test";    //Êı¾İ¿âÃû
-    conn = mysql_init(NULL);            //¾ä±ú³õÊ¼»¯
-    if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))  //ÅĞ¶ÏÊı¾İ¿âÊÇ·ñÁ¬½Ó³É¹¦
+    const char* server = "localhost";   //æœ¬åœ°è¿æ¥
+    const char* user = "root";          //ç”¨æˆ·å
+    const char* password = "...haohaoxuexi123";//mysqlå¯†ç 
+    const char* database = "test";    //æ•°æ®åº“å
+    conn = mysql_init(NULL);            //å¥æŸ„åˆå§‹åŒ–
+    if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))  //åˆ¤æ–­æ•°æ®åº“æ˜¯å¦è¿æ¥æˆåŠŸ
     {
-        printf("Á¬½ÓÊ§°Ü£º%s", mysql_error(conn));      //±¨´í
+        printf("è¿æ¥å¤±è´¥ï¼š%s", mysql_error(conn));      //æŠ¥é”™
         _getch();
     }
     else
     {
-        printf("Á¬½Ó³É¹¦£¡°´ÈÎÒâ¼ü¼ÌĞø");
+        printf("è¿æ¥æˆåŠŸï¼æŒ‰ä»»æ„é”®ç»§ç»­");
         _getch();
-        mysql_set_character_set(conn, "gbk");    //ÉèÖÃ±àÂë£¬±ÜÃâÂÒÂë
+        mysql_set_character_set(conn, "gbk");    //è®¾ç½®ç¼–ç ï¼Œé¿å…ä¹±ç 
         meau();
     }
-    mysql_close(conn);                  //¶Ï¿ªÊı¾İ¿â
+    mysql_close(conn);                  //æ–­å¼€æ•°æ®åº“
 }
