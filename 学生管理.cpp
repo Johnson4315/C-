@@ -20,7 +20,7 @@ typedef struct Stu
 	double avg;
 }Student;
 MYSQL* conn;
-char szSqlTexts[1000] = "";    //SQLÓï¾ä
+char szSqlTexts[1000] = "";    //SQLè¯­å¥
 char sortField[100];
 Student stu;
 
@@ -43,8 +43,8 @@ void OutputStudenta()
 		i = (int)mysql_num_rows(res);
 		if (i > 0)
 		{
-			printf("\n¹²ÓĞ%d¸öÑ§ÉúĞÅÏ¢£º\n==========\n", i);
-			printf("Ñ§ºÅ            ĞÕÃû        ĞÔ±ğ   ÄêÁä   CÓïÑÔ   Ó¢Óï   ¸ßÊı   Æ½¾ù·Ö\n");
+			printf("\nå…±æœ‰%dä¸ªå­¦ç”Ÿä¿¡æ¯ï¼š\n==========\n", i);
+			printf("å­¦å·            å§“å        æ€§åˆ«   å¹´é¾„   Cè¯­è¨€   è‹±è¯­   é«˜æ•°   å¹³å‡åˆ†\n");
 			printf("----------------------------\n");
 			while (1)
 			{
@@ -56,7 +56,7 @@ void OutputStudenta()
 			}
 		}
 		else
-			printf("\nÃ»ÓĞÑ§ÉúĞÅÏ¢\n===================\n");
+			printf("\næ²¡æœ‰å­¦ç”Ÿä¿¡æ¯\n===================\n");
 		mysql_free_result(res);
 	}
 	printf("-----------------------------------");
@@ -112,38 +112,38 @@ bool InputStudenta(int mode, bool OnlyID)
 {
 	bool b;
 	if (OnlyID == false)
-		printf("\nÇëÊäÈëÑ§ÉúĞÅÏ¢£º");
+		printf("\nè¯·è¾“å…¥å­¦ç”Ÿä¿¡æ¯ï¼š");
 	printf("\n---------------------------\n");
 	do
 	{
-		printf("Ñ§ºÅ£¨12¸ö×Ö·ûÒÔÄÚ£¬q!±íÊ¾·ÅÆú±¾´Î²Ù×÷£©:\t");
+		printf("å­¦å·ï¼ˆ12ä¸ªå­—ç¬¦ä»¥å†…ï¼Œq!è¡¨ç¤ºæ”¾å¼ƒæœ¬æ¬¡æ“ä½œï¼‰:\t");
 		scanf("%s", stu.id);
 		stu.id[IDLens - 1] = 0;
 		if (strcmp(stu.id, "q!") == 0)
 			return false;
 		b = ExistsStudenta(stu.id);
 		if (mode == 1 && b == false)
-			printf("Ñ§ºÅ%s²»´æÔÚ£¬ÖØĞÂÊäÈëÑ§ºÅ¡£\n", stu.id);
+			printf("å­¦å·%sä¸å­˜åœ¨ï¼Œé‡æ–°è¾“å…¥å­¦å·ã€‚\n", stu.id);
 		else if (mode == 2 && b == true)
-			printf("Ñ§ºÅ%s´æÔÚ£¬ÖØĞÂÊäÈëÑ§ºÅ¡£\n", stu.id);
+			printf("å­¦å·%så­˜åœ¨ï¼Œé‡æ–°è¾“å…¥å­¦å·ã€‚\n", stu.id);
 		else
 			break;
 	} while (1);
 	if (OnlyID)
 		return true;
-	printf("ĞÕÃû(10¸ö×Ö·ûÒÔÄÚ£©£º\t");
+	printf("å§“å(10ä¸ªå­—ç¬¦ä»¥å†…ï¼‰ï¼š\t");
 	scanf("%s", stu.name);
 	stu.name[NameLens - 1] = 0;
-	printf("ĞÔ±ğ(4¸ö×Ö·ûÒÔÄÚ£©£º\t");
+	printf("æ€§åˆ«(4ä¸ªå­—ç¬¦ä»¥å†…ï¼‰ï¼š\t");
 	scanf("%s", stu.sex);
 	stu.sex[SexLens - 1] = 0;
-	printf("ÄêÁä(ÕûÊı£©£º\t");
+	printf("å¹´é¾„(æ•´æ•°ï¼‰ï¼š\t");
 	scanf("%d", &stu.age);
-	printf("¡¶CÓïÑÔ¡·³É¼¨£¨ÕûÊı£©£º\t");
+	printf("ã€ŠCè¯­è¨€ã€‹æˆç»©ï¼ˆæ•´æ•°ï¼‰ï¼š\t");
 	scanf("%d", &stu.score.cp);
-	printf("¡¶Ó¢Óï¡·³É¼¨£¨ÕûÊı£©£º\t");
+	printf("ã€Šè‹±è¯­ã€‹æˆç»©ï¼ˆæ•´æ•°ï¼‰ï¼š\t");
 	scanf("%d", &stu.score.en);
-	printf("¡¶¸ßÊı¡·³É¼¨£¨ÕûÊı£©£º\t");
+	printf("ã€Šé«˜æ•°ã€‹æˆç»©ï¼ˆæ•´æ•°ï¼‰ï¼š\t");
 	scanf("%d", &stu.score.math);
 	stu.avg = (stu.score.cp + stu.score.en + stu.score.math) / 3.0;
 	printf("---------------------------\n");
@@ -156,10 +156,10 @@ void DisplaySortMenua()
 	int i;
 	do
 	{
-		printf("\nÇëÑ¡ÔñÅÅĞòµÄ×Ö¶Î£º\n");
+		printf("\nè¯·é€‰æ‹©æ’åºçš„å­—æ®µï¼š\n");
 		printf("---------------------------\n");
-		printf("(1)Ñ§ºÅ\t(2)ĞÕÃû\t(3)ĞÔ±ğ\t(4)ÄêÁä\n");
-		printf("(5)CÓïÑÔ\t(6)Ó¢Óï\t(7)¸ßÊı\t(8)Æ½¾ù·Ö\n");
+		printf("(1)å­¦å·\t(2)å§“å\t(3)æ€§åˆ«\t(4)å¹´é¾„\n");
+		printf("(5)Cè¯­è¨€\t(6)è‹±è¯­\t(7)é«˜æ•°\t(8)å¹³å‡åˆ†\n");
 		printf("---------------------------\n");
 		i = _getche() - '0';
 		strcpy(sortField, "");
@@ -190,7 +190,7 @@ void DisplaySortMenua()
 			strcpy(sortField, "score_cp+score_en+score_math");
 			break;
 		default:
-			printf("\nÇëÑ¡ÔñÕıÈ·µÄ²Ù×÷£¡");
+			printf("\nè¯·é€‰æ‹©æ­£ç¡®çš„æ“ä½œï¼");
 			break;
 		}
 	} while (i < 1 || i>8);
@@ -198,9 +198,9 @@ void DisplaySortMenua()
 	do
 	{
 		system("cls");
-		printf("\nÇëÑ¡ÔñÅÅĞò·½Ïò£º\n");
+		printf("\nè¯·é€‰æ‹©æ’åºæ–¹å‘ï¼š\n");
 		printf("---------------------------\n");
-		printf("(1)ÉıĞò\t(2)½µĞò\t\n");
+		printf("(1)å‡åº\t(2)é™åº\t\n");
 		printf("---------------------------\n");
 		i = _getche() - '0';
 		switch (i)
@@ -211,7 +211,7 @@ void DisplaySortMenua()
 			strcat(sortField, " desc");
 			break;
 		default:
-			printf("\nÇëÑ¡ÔñÕıÈ·µÄ²Ù×÷£¡");
+			printf("\nè¯·é€‰æ‹©æ­£ç¡®çš„æ“ä½œï¼");
 			break;
 		}
 	} while (i < 1 || i>2);
@@ -223,13 +223,13 @@ void DisplayMainMenua()
 	while (1)
 	{
 		system("cls");
-		printf("\nÏµÍ³Ö÷²Ëµ¥£¬ÇëÑ¡Ôñ£º\n");
+		printf("\nç³»ç»Ÿä¸»èœå•ï¼Œè¯·é€‰æ‹©ï¼š\n");
 		printf("---------------------------\n");
-		printf("(1)Ôö¼ÓÑ§Éú¼°³É¼¨\n");
-		printf("(2)É¾³ıÑ§Éú¼°³É¼¨\n");
-		printf("(3)ĞŞ¸ÄÑ§Éú¼°³É¼¨\n");
-		printf("(4)ÏÔÊ¾ËùÓĞ¼ÇÂ¼\n");
-		printf("(0)ÍË³ö³ÌĞò\n");
+		printf("(1)å¢åŠ å­¦ç”ŸåŠæˆç»©\n");
+		printf("(2)åˆ é™¤å­¦ç”ŸåŠæˆç»©\n");
+		printf("(3)ä¿®æ”¹å­¦ç”ŸåŠæˆç»©\n");
+		printf("(4)æ˜¾ç¤ºæ‰€æœ‰è®°å½•\n");
+		printf("(0)é€€å‡ºç¨‹åº\n");
 		printf("---------------------------\n");
 		i = _getche() - '0';
 		switch (i)
@@ -257,7 +257,7 @@ void DisplayMainMenua()
 		case 0:
 			return;
 		default:
-			printf("\nÇëÑ¡ÔñÕıÈ·µÄ²Ù×÷£¡");
+			printf("\nè¯·é€‰æ‹©æ­£ç¡®çš„æ“ä½œï¼");
 			break;
 		}
 	}
@@ -272,17 +272,17 @@ void MYstudent()
 	unsigned int port = 3306;
 	if ((conn = mysql_init((MYSQL*)0)) && (mysql_options(conn, MYSQL_SET_CHARSET_NAME, "gbk") == 0) && mysql_real_connect(conn, host, username, password, szTargetDSN, port, NULL, 0))
 	{
-		printf("Êı¾İ¿âÁ¬½Ó³É¹¦£¡\n");
+		printf("æ•°æ®åº“è¿æ¥æˆåŠŸï¼\n");
 		_getch();
 		DisplayMainMenua();
 		mysql_close(conn);
 	}
 	else
 	{
-		printf("\nÁ´½ÓÊı¾İ¿âÊ§°Ü¡£\n");
+		printf("\né“¾æ¥æ•°æ®åº“å¤±è´¥ã€‚\n");
 		_getch();
 		mysql_close(conn);
 	}
-	printf("hahaha¡¤¡¤¡¤\n");
+	printf("hahahaÂ·Â·Â·\n");
 	_getch();
 }
